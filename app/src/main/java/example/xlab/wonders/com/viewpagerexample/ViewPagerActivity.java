@@ -36,11 +36,11 @@ public class ViewPagerActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_pager);
         pager = (ViewPager) findViewById(R.id.viewpager);
-        tabStrip = (PagerTabStrip) findViewById(R.id.tabstrip);
 
+
+        tabStrip = (PagerTabStrip) findViewById(R.id.tabstrip);
         tabStrip.setDrawFullUnderline(false);
         tabStrip.setBackgroundColor(this.getResources().getColor(R.color.bg));
-
         tabStrip.setTabIndicatorColor(this.getResources().getColor(R.color.red));
         tabStrip.setTextSpacing(200);
 

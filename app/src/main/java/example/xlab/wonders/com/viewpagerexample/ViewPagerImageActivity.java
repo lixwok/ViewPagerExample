@@ -1,7 +1,12 @@
 package example.xlab.wonders.com.viewpagerexample;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -9,12 +14,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewOutlineProvider;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.json.JSONObject;
+
+import example.xlab.wonders.com.utils.HttpURLConnectionUtils;
+
 
 public class ViewPagerImageActivity extends Activity {
+
+    static Handler handler;
 
     private ViewPager viewPager;
 
@@ -59,6 +71,17 @@ public class ViewPagerImageActivity extends Activity {
             ImageView image = (ImageView) itemView.findViewById(R.id.image);
 
             TextView text = (TextView) itemView.findViewById(R.id.text);
+
+            text.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        Login.Login(ViewPagerImageActivity.this);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
 
             TextView intro = (TextView) itemView.findViewById(R.id.image_intro);
 
@@ -167,5 +190,39 @@ public class ViewPagerImageActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public static class TestTask extends AsyncTask<Void, Void, JSONObject> {
+
+        private Context context;
+
+        public TestTask(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject object) {
+
+            final Intent intent = new Intent(context, successActivity.class);
+            handler = new Handler(new Handler.Callback() {
+                @Override
+                public boolean handleMessage(Message msg) {
+                    String str = msg.getData().getString("");
+                    return false;
+                }
+            });
+            context.startActivity(intent);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected JSONObject doInBackground(Void... params) {
+            String url = "http://localhost:8080/login/telephoneIsExist";
+            return HttpURLConnectionUtils.requestByGet(url);
+        }
     }
 }

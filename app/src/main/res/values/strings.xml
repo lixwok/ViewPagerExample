@@ -11,4 +11,5 @@
     <string name="title_activity_tab2">tab2</string>
     <string name="title_activity_view_pager_image">驯鹿约吧</string>
     <string name="title_activity_recycler_view">RecyclerViewActivity</string>
+    <string name="title_activity_success">successActivity</string>
 </resources>

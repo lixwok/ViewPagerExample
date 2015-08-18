@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="example.xlab.wonders.com.viewpagerexample" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/image01"
@@ -18,7 +20,10 @@
         </activity>
         <activity
             android:name=".ViewPagerImageActivity"
-            android:label="@string/title_activity_view_pager_image" >
+            android:label="@string/title_activity_view_pager_image" />
+        <activity
+            android:name=".successActivity"
+            android:label="@string/title_activity_success" >
         </activity>
     </application>
 
